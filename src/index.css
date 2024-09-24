@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-950;
+}
+
+.text-stroke {
+  /* color: var(--white); 기본 텍스트 색상 */
+  transition: all 0.5s; /* 전환 효과 */
+}
+
+.text-stroke:hover {
+  color: var(--black); /* 호버 시 텍스트 색상 */
+  -webkit-text-stroke-color: var(--white); /* 호버 시 스트로크 색상 */
+}
