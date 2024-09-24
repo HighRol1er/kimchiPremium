@@ -1,6 +1,11 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import Footer from "./components/Footer"
-import Header from './components/header/Header'
+import { Routes, Route } from 'react-router-dom'
+import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
+import HomePage from './Pages/HomePage'
+import ChartPage from './Pages/ChartPage'
+import MarketcapPage from './Pages/MarketcapPage'
+
 
 
 function App() {
@@ -8,7 +13,12 @@ function App() {
     <div className='bg-gray-950 font-sans'>
       <ChakraProvider>
         <Header />
-        {/* <Footer /> */}
+        <Routes>
+          <Route path='/' element={<HomePage />}/>
+          <Route path='/chart' element={<ChartPage />}/>
+          <Route path='/marketcap' element={<MarketcapPage />}/>
+        </Routes>
+        <Footer />
       </ChakraProvider>
     </div>
   )
