@@ -52,7 +52,6 @@ const AllCoinsTable = () => {
           </Thead>
           <Tbody>
             <Tr>
-            {/* <Td p="0" ><img style={{ width: '20px', height: '20px' }} src={btc} alt="" /></Td> */}
               <Td>
                 <div className='flex gap-1 items-center'>
                   <img style={{ width: '16px', height: '16px' }} src={btc} alt="" />

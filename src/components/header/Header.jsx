@@ -42,8 +42,8 @@ const Header = () => {
         </div>
       </div>
 
-      {/* NOTE: 이거 컴포넌트로 바꾸자 중복된다. */}
-      <div className='text-white flex gap-5 m-3 max-w-screen-xl mx-auto pl-8'>
+      {/* NOTE: 이거 컴포넌트로 바꾸자 중복된다. + sticky 옵션 */}
+      <div className='text-white flex gap-5 m-3 max-w-screen-xl mx-auto pl-8 bg-gray-800 font-light'>
         <div className='flex gap-1'>
           <img src={usd} style={{ width: '24px', height: '24px' }}/>
           <p>1,329 원</p>
