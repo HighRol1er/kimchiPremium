@@ -81,17 +81,6 @@ const AllCoinsTable = () => {
               <Td>1,505억</Td>
               <Td>114,213(0.14%)</Td>
             </Tr>
-            {/* NOTE: Tr 태그 안에 있는거 한방에 map()으로 돌리는게 맞는듯*/}
-            {/* {coinTickers.map((ticker, index) => { */}
-              {/* return ( */}
-                {/* <Tr> */}
-                  {/* <Td key={index}>{ticker}</Td> */}
-                  {/* <Td>{binancePrices[ticker] !== undefined ? binancePrices[ticker] : ''}</Td> */}
-                  {/* <Td>{upbitPrices[ticker] !== undefined? upbitPrices[ticker] : ''}</Td> */}
-                {/* </Tr> */}
-                {/* ) */}
-              {/* })} */}
-
             {coinData.map((data, index) => {
               // const ticker = data.market.replace('KRW-','');
               return(
