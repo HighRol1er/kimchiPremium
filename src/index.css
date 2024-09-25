@@ -4,9 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
   @apply bg-gray-950;
-}
+} */
 
 .text-stroke {
   /* color: var(--white); 기본 텍스트 색상 */

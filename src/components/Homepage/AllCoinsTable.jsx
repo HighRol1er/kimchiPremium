@@ -1,21 +1,37 @@
+import { useEffect,useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
 } from '@chakra-ui/react';
 
 import btc from "../../assets/btcforproject.svg";
 import upbitLogo from "../../assets/logo_upbit.svg";
 import binanceLogo from "../../assets/logo_binance.svg";
+import { getMarketDataFromUpbit } from '../../functions/getMarketDataFromUpbit';
+import { getPriceDataFromBinance } from '../../functions/getPriceDataFromBinance';
+import { getPriceDataFromUpbit } from '../../functions/getPriceDataFromUpbit';
+import TableData from './TableData';
 
-import { Link } from 'react-router-dom';
 const AllCoinsTable = () => {
+  const [coinData, setCoinData] = useState([]);
+
+  useEffect(() => {
+    upbitMarketData();
+  },[]);
+  
+  const upbitMarketData = async () => {
+    const data = await getPriceDataFromUpbit();
+    // console.log(data);
+
+    setCoinData(data);
+  };
+  
   return (
     <TableContainer>
       <div className='flex gap-8'>
@@ -26,7 +42,6 @@ const AllCoinsTable = () => {
           </Link>
           <div>Upbit</div>
         </div>
-
         <div className='flex flex-col items-center'>
           <div>비교거래소</div>
           <Link to="https://www.binance.com/en">
@@ -35,6 +50,7 @@ const AllCoinsTable = () => {
           <div>Binance</div>
         </div>
       </div>
+      
       <Table variant='simple' size='sm'>
           <Thead>
             <Tr>
@@ -50,36 +66,38 @@ const AllCoinsTable = () => {
               <Th>김치프리미엄(￦)</Th>
             </Tr>
           </Thead>
+
           <Tbody>
             <Tr>
               <Td>
                 <div className='flex gap-1 items-center'>
                   <img style={{ width: '16px', height: '16px' }} src={btc} alt="" />
-                  BTC
+                  Example
                 </div>
               </Td>
-              <Td>63,816.81</Td>
+              <Td><div>63,816.81</div></Td>
               <Td>84,987,000</Td>
               <Td>0.43%</Td>
               <Td>1,505억</Td>
               <Td>114,213(0.14%)</Td>
             </Tr>
-            <Tr>
-              <Td>ETH</Td>
-              <Td>2,641.25</Td>
-              <Td>3,519,000</Td>
-              <Td>-0.54%</Td>
-              <Td>501억</Td>
-              <Td>7,113(0.20%)</Td>
-            </Tr>
-            <Tr>
-              <Td>SOL</Td>
-              <Td>346.90</Td>
-              <Td>461,950</Td>
-              <Td>1.04%</Td>
-              <Td>48억</Td>
-              <Td>839.0 (0.18%)</Td>
-            </Tr>
+            {/* NOTE: Tr 태그 안에 있는거 한방에 map()으로 돌리는게 맞는듯*/}
+            {/* {coinTickers.map((ticker, index) => { */}
+              {/* return ( */}
+                {/* <Tr> */}
+                  {/* <Td key={index}>{ticker}</Td> */}
+                  {/* <Td>{binancePrices[ticker] !== undefined ? binancePrices[ticker] : ''}</Td> */}
+                  {/* <Td>{upbitPrices[ticker] !== undefined? upbitPrices[ticker] : ''}</Td> */}
+                {/* </Tr> */}
+                {/* ) */}
+              {/* })} */}
+
+            {coinData.map((data, index) => {
+              // const ticker = data.market.replace('KRW-','');
+              return(
+                  <TableData data={data}/>
+              )
+            })}  
           </Tbody>
           
       </Table>
