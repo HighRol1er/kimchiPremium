@@ -1,10 +1,11 @@
-// TradingViewWidget.jsx
 import React, { useEffect, useRef, memo } from 'react';
 import BtcKrwBtcUsdtChart from '../components/Homepage/BtcKrwBtcUsdtChart';
 import BitcoinDChart from '../components/Homepage/BitcoinDChart';
 import SelectCoin from '../components/Homepage/SelectCoin';
-import axios from 'axios';
 
+/**
+ * TODO: setInterval + 관심목록 업데이트( 지금 새로고침 안누르면 바로바로 업데이트 안됨)
+ */
 function HomePage() {
 
   return (

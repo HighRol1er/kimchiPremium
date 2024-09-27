@@ -1,5 +1,4 @@
-import { useEffect,useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { useEffect,useState } from 'react';
 import {
   Table,
   Thead,
@@ -11,45 +10,28 @@ import {
 } from '@chakra-ui/react';
 
 import btc from "../../assets/btcforproject.svg";
-import upbitLogo from "../../assets/logo_upbit.svg";
-import binanceLogo from "../../assets/logo_binance.svg";
-import { getMarketDataFromUpbit } from '../../functions/getMarketDataFromUpbit';
-import { getPriceDataFromBinance } from '../../functions/getPriceDataFromBinance';
-import { getPriceDataFromUpbit } from '../../functions/getPriceDataFromUpbit';
+// import { getPriceDataFromUpbit } from '../../functions/getPriceDataFromUpbit';
 import TableData from './TableData';
+import TableHeader from './TableHeader';
 
-const AllCoinsTable = () => {
-  const [coinData, setCoinData] = useState([]);
+const AllCoinsTable = ({ coinData }) => {
+  // const [coinData, setCoinData] = useState([]);
+  console.log(coinData);
 
-  useEffect(() => {
-    upbitMarketData();
-  },[]);
+  // useEffect(() => {
+  //   upbitMarketData();
+  // },[]);
   
-  const upbitMarketData = async () => {
-    const data = await getPriceDataFromUpbit();
-    // console.log(data);
+  // const upbitMarketData = async () => {
+  //   const data = await getPriceDataFromUpbit();
+  //   console.log(data);
 
-    setCoinData(data);
-  };
+  //   setCoinData(data);
+  // };
   
   return (
     <TableContainer>
-      <div className='flex gap-8'>
-        <div className='flex flex-col items-center'>
-          <div>기준거래소</div>
-          <Link to="https://upbit.com/home">
-            <img style={{ width: '48px', height: '48px' }} src={upbitLogo} alt='' />
-          </Link>
-          <div>Upbit</div>
-        </div>
-        <div className='flex flex-col items-center'>
-          <div>비교거래소</div>
-          <Link to="https://www.binance.com/en">
-            <img style={{ width: '48px', height: '48px' }} src={binanceLogo} alt='' />
-          </Link>
-          <div>Binance</div>
-        </div>
-      </div>
+      <TableHeader />
       
       <Table variant='simple' size='sm'>
           <Thead>
@@ -82,9 +64,8 @@ const AllCoinsTable = () => {
               <Td>114,213(0.14%)</Td>
             </Tr>
             {coinData.map((data, index) => {
-              // const ticker = data.market.replace('KRW-','');
               return(
-                  <TableData data={data}/>
+                  <TableData key={index} data={data}/>
               )
             })}  
           </Tbody>

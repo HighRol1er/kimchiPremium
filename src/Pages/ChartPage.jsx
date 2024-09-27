@@ -2,7 +2,9 @@ import React from 'react'
 
 const ChartPage = () => {
   return (
-    <div className='text-white'>ChartPage</div>
+    <div>
+      ChartPage
+    </div>
   )
 }
 
