@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, memo } from 'react';
+import { useEffect, useRef } from 'react';
 
-function BtcKrwBtcUsdtChart() {
-  // const container = useRef();
+const FetchChart = () => {
   const containerRef = useRef(null);
 
   useEffect(
@@ -16,15 +15,15 @@ function BtcKrwBtcUsdtChart() {
       script.async = true;
       script.innerHTML = `
         {
-          "width": "600",
-          "height": "400",
-          "symbol": "BITHUMB:BTCKRW/BINANCE:BTCUSDT",
+          "width": "1800",
+          "height": "900",
+          "symbol": "BINANCE:BTCUSDT",
           "interval": "D",
-          "timezone": "Asia/Seoul",
+          "timezone": "Etc/UTC",
           "theme": "dark",
           "style": "1",
           "locale": "en",
-          "hide_top_toolbar": true,
+          "hide_side_toolbar": false,
           "allow_symbol_change": true,
           "calendar": false,
           "support_host": "https://www.tradingview.com"
@@ -45,4 +44,4 @@ function BtcKrwBtcUsdtChart() {
   );
 }
 
-export default memo(BtcKrwBtcUsdtChart);
+export default FetchChart;

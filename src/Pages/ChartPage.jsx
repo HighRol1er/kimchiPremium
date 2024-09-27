@@ -1,10 +1,11 @@
-import React from 'react'
+import FetchChart from "../components/Chartpage/FetchChart"
+
 
 const ChartPage = () => {
   return (
-    <div>
-      ChartPage
-    </div>
+      <div className="flex items-center justify-center min-h-screen w-full">
+        <FetchChart />
+      </div>
   )
 }
 
