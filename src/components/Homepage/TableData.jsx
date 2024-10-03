@@ -63,8 +63,7 @@ const TableData = ({data }) => {
           <Td>{binancePrices[ticker]}</Td>
           <Td>{data.trade_price}</Td>
           <Td>{percentage}%</Td>
-          <Td>{formatVolume} 억</Td>
-          <Td></Td> 
+          <Td>{formatVolume} 억</Td> 
         </Tr>
     </>
   )

@@ -45,7 +45,7 @@ const AllCoinsTable = ({ coinData }) => {
               <Th>Upbit(￦)</Th>
               <Th>등락(%)</Th>
               <Th>거래량</Th>
-              <Th>김치프리미엄(￦)</Th>
+
             </Tr>
           </Thead>
 
@@ -61,7 +61,6 @@ const AllCoinsTable = ({ coinData }) => {
               <Td>84,987,000</Td>
               <Td>0.43%</Td>
               <Td>1,505억</Td>
-              <Td>114,213(0.14%)</Td>
             </Tr>
             {coinData.map((data, index) => {
               return(
