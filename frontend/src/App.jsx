@@ -14,9 +14,9 @@ function App() {
       <ChakraProvider>
         <Header />
         <Routes>
-          <Route path='/' element={<HomePage />}/>
-          <Route path='/chart' element={<ChartPage />}/>
-          <Route path='/marketcap' element={<MarketcapPage />}/>
+          {/* <Route path='/' element={<HomePage />}/> */}
+          {/* <Route path='/chart' element={<ChartPage />}/> */}
+          {/* <Route path='/marketcap' element={<MarketcapPage />}/> */}
         </Routes>
         <Footer />
       </ChakraProvider>
