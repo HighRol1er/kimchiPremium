@@ -23,3 +23,7 @@
 7.TODO: Binance에서 가져온거 달러*테더로 원화 가격, 프리미엄도 구하고.. 내일까지 하기 
 8.TODO: 즐찾기능 다시 구현하기 ( 저번에 즐찾하면 바로 적용이 안됐음 즐찾 즐삭이 바로바로되게끔)
  -> **내일 TableItem부터다시 시작** 커밋하자!
+9. TODO:backend / exchangePrice.js 
+-> ticker가 업비트에는 존재하지만 바이낸스에는 없을 수 있기 때문에 예외 처리를 해줘야 함
+10. TableItem.jsx/binance(￦) :  달러 * binance($)	해야되는데 props로 내릴 수가 없네 WTF 리덕스 마렵다.. 
+11. binance(￦)이거 코드 내일 다시보자 코드 쓰레기같네.. ㅇㅅㅇ
