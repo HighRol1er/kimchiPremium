@@ -9,12 +9,20 @@ import SelectCoin from '../components/Homepage/SelectCoin';
 function HomePage() {
 
   return (
-    <div>
-      <div className='text-white flex justify-center gap-5'>
+    <div className='max-w-screen-2xl mx-auto'>
+      <div className='flex justify-center gap-5 bg-gray-800 rounded-lg pt-5 pb-5'>
         <BitcoinDChart />
         <BtcKrwBtcUsdtChart />
       </div>
-      <SelectCoin />
+
+      <div className='flex gap-5 mt-5'>
+        <div className='flex-1 bg-gray-800 mt-5 rounded-lg'>
+          <SelectCoin />
+        </div>
+        <div className='w-1/3 text-white bg-gray-800 mt-5 rounded-lg h-[800px]'>
+          chatbox
+        </div>
+      </div>
     </div>
   )
 }

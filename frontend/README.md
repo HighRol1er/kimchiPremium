@@ -11,3 +11,9 @@
 4. TODO: 아직 테더는 안가져옴 테더는 KRW-USDT랑 USDT-USD 환율 둘다 가져올 예정.
 5. TODO: 백엔드도 Route 별로 나눠서 해야지 지금 server.js에 다 작성해놔서 어지러워진다.
 6. 일단 커밋하자.
+
+#### Oct/22
+1. Header에서 보여주는 가격 데이터는 다 됐다.
+2. Header에서 고칠건 이제 Tradingview widget코드 어떻게하면 좀 더 디벨롭할 수 있을지정도? <-Tradingview widget코드들 손볼 때 대 같이 보자.
+3. Header/CurrencyPrice.jsx에서 비동기 함수들 Promise.all 써서 병렬실행 할 것 << 이게 더 좋음 
+4. HomePage에서 불러오는 SelectCoin.jsx 이거 컴포넌트명 바꿔야 될듯 CoinList?정도 

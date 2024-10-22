@@ -23,7 +23,7 @@ const SelectCoin = () => {
   },[]);
 
   return (
-    <div className='max-w-screen-xl mx-auto text-white'>
+    <div className='flex mx-auto text-white'>
 
       <Tabs isFitted variant='line' size='lg'>
       <TabList mb='1em'>
@@ -41,7 +41,7 @@ const SelectCoin = () => {
             />
         </TabPanel>
       </TabPanels>
-    </Tabs>
+      </Tabs>
     </div>
   )
 }

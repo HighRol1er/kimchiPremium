@@ -16,7 +16,7 @@ function BtcKrwBtcUsdtChart() {
       script.async = true;
       script.innerHTML = `
         {
-          "width": "600",
+          "width": "700",
           "height": "400",
           "symbol": "BITHUMB:BTCKRW/BINANCE:BTCUSDT",
           "interval": "D",

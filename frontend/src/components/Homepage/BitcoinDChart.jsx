@@ -14,7 +14,7 @@ function BitcoinDChart() {
     script.async = true;
     script.innerHTML = `
       {
-        "width": "600",
+        "width": "700",
         "height": "400",
         "symbol": "CRYPTOCAP:BTC.D",
         "interval": "D",

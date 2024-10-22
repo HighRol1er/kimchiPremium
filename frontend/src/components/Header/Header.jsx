@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <>
       <TickerTapeWidgetFromTradingView />
-      <div className='flex items-center justify-between mx-auto max-w-screen-xl '> {/*pl-3 pr-5 <이 옵션 왜 넣었지?  */}
+      <div className='flex items-center justify-between mx-auto max-w-screen-2xl '> {/*pl-3 pr-5 <이 옵션 왜 넣었지?  */}
         <div className='text-white flex gap-2 p-5 '> 
           <Link to='/'>
             <div className='flex font-semibold text-4xl text-[#3a80e9] pr-10 text-stroke cursor-pointer'>

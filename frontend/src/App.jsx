@@ -10,11 +10,11 @@ import MarketcapPage from './Pages/MarketcapPage'
 
 function App() {
   return(
-    <div className='bg-gray-950 font-sans'>
+    <div className='bg-[#131313] font-sans'>
       <ChakraProvider>
         <Header />
         <Routes>
-          {/* <Route path='/' element={<HomePage />}/> */}
+          <Route path='/' element={<HomePage />}/>
           {/* <Route path='/chart' element={<ChartPage />}/> */}
           {/* <Route path='/marketcap' element={<MarketcapPage />}/> */}
         </Routes>
