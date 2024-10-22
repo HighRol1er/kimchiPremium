@@ -1,9 +1,11 @@
-import btc from "../../assets/btcforproject.svg";
-import upbitLogo from "../../assets/logo_upbit.svg";
-import binanceLogo from "../../assets/logo_binance.svg";
+// import btc from "../../assets/btcforproject.svg";
+import upbitLogo from "../../../assets/logo_upbit.svg";
+import binanceLogo from "../../../assets/logo_binance.svg";
+
+
 import { Link } from "react-router-dom";
 
-const TableHeader = () => {
+const ExchangePair = () => {
   return (
     <div className='flex gap-8 '>
         <div className='flex flex-col items-center'>
@@ -24,4 +26,4 @@ const TableHeader = () => {
   )
 }
 
-export default TableHeader
+export default ExchangePair

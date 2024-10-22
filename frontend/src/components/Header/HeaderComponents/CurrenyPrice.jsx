@@ -41,7 +41,7 @@ const CurrenyPrice = () => {
           <CurrencyPriceItem icon={HiCurrencyYen} price1={jpyKrw} />
           <div className='flex gap-2'>
             <img src={usdt} style={{ width: '24px', height: '24px' }}/>
-            <p className='pr-2'>{krwUsdt} 원, {usdtKrw} $</p>
+            <p className='pr-2'>{krwUsdt} ₩, {usdtKrw} $</p>
           </div>
         </div>
       </div>

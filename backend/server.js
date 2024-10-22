@@ -1,5 +1,6 @@
 import express from "express";
 import currencyRoute from "./routes/currencyPrice.js";
+import exchangeRoute from "./routes/exchangePrice.js";
 import cors from "cors";
 // import { createServer } from 'http';
 // import { Server } from 'socket.io';
@@ -13,6 +14,7 @@ app.use(cors({
 }));
 
 app.use('/api',currencyRoute);
+app.use('/api/exchange/', exchangeRoute);
 
 app.listen(PORT, () => {
   console.log(`Sever Listening on Port: ${PORT}`);

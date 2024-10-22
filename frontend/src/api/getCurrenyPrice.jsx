@@ -19,7 +19,7 @@ export const getJpyKrwCurrenyPrice = async () => {
 
     return priceData;
   } catch (error) {
-    console.log('Error fetching USD-KRW', error);
+    console.log('Error fetching JPY-KRW', error);
   }
 };
 

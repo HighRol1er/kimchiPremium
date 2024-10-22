@@ -1,3 +1,7 @@
+/**
+ * Get currency data(price) from Google-finance and Upbit
+ * */ 
+
 import express from "express";
 import axios from "axios";
 import * as cheerio from 'cheerio';
