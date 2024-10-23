@@ -6,14 +6,14 @@ import {
   Th,
   TableContainer,
 } from '@chakra-ui/react';
-import TableItem from './TableItem';
+import TableItem from '../TableComponents/TableItem';
 
-const AllCoinsTable = ({ allCoinDataFromUpbit, usdKrw }) => {
-  
+
+const WatchListCoinsTable = ({ allCoinDataFromUpbit, usdKrw }) => {
   return (
-    <TableContainer>
+      <TableContainer>
       <Table variant='striped' colorScheme='whiteAlpha' size='sm'>
-        <Thead>
+      <Thead>
           <Tr>
             <Th><ul className='text-white pl-6'>코인</ul></Th>
             <Th><ul className='text-white'>Binance($)</ul></Th>
@@ -24,14 +24,17 @@ const AllCoinsTable = ({ allCoinDataFromUpbit, usdKrw }) => {
             <Th isNumeric><ul className='text-white pr-6'>프리미엄(￦)</ul></Th>
           </Tr>
         </Thead>
-        <Tbody>
+
+          <Tbody>
           {allCoinDataFromUpbit.map((coinData, index) => (
             <TableItem key={index} coinData={coinData} usdKrw={usdKrw} />
-          ))}
-        </Tbody>
+          ))}  
+          </Tbody>
+          
       </Table>
     </TableContainer>
+    
   )
 }
 
-export default AllCoinsTable
+export default WatchListCoinsTable

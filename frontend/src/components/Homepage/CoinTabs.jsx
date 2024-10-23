@@ -1,15 +1,26 @@
 import { useEffect, useState } from 'react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
-import AllCoinsTable from './TableComponents/AllCoinsTable';
 import ExchangePair from './TableComponents/ExchangePair';
+import AllCoinsTable from './TableComponents/AllCoinsTable';
+import WatchListCoinsTable from './WatchlistCompoents/WatchlistCoinsTable';
 
 import { getMarketDataFromUpbit } from '../../api/getExchangeData';
+import { getUsdKrwCurrenyPrice } from '../../api/getCurrenyPrice';
 
 
 const CoinTabs = () => {
-
   const [allCoinDataFromUpbit, setAllCoinDataFromUpbit] = useState([]);
+  const [usdKrw, setUsdKrw] = useState();
+
+  useEffect(() => {
+    const getCurrencyPrice = async () => {
+      const priceUsdKrw = await getUsdKrwCurrenyPrice();
+      setUsdKrw(priceUsdKrw);
+    }
+
+    getCurrencyPrice();
+  }, []);
 
   useEffect(() => {
     const getExchangeData = async () => {
@@ -33,11 +44,11 @@ const CoinTabs = () => {
         
         <TabPanels>
           <TabPanel>
-            <AllCoinsTable allCoinDataFromUpbit={allCoinDataFromUpbit} />
+            <AllCoinsTable allCoinDataFromUpbit={allCoinDataFromUpbit} usdKrw={usdKrw} />
           </TabPanel>
           <TabPanel>
             
-            <p>two!</p>{/**즐찾하기 */}
+            <WatchListCoinsTable allCoinDataFromUpbit={allCoinDataFromUpbit} usdKrw={usdKrw}/>
           
           </TabPanel>
         </TabPanels>

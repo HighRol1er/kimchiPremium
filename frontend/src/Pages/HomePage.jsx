@@ -15,7 +15,7 @@ function HomePage() {
         <BtcKrwBtcUsdtChart />
       </div>
 
-      <div className='flex gap-5 mt-8 text-white '>
+      <div className='flex gap-5 mt-8 text-white pb-5 '>
         <div className='flex-1 bg-gray-800  rounded-lg'>
           <CoinTabs />
         </div>
