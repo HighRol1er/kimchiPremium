@@ -19,7 +19,6 @@ const TableItem = ({ coinData, usdKrw }) => {
       const formatCoinPrice = Number(coinPrice).toFixed(2);
 
       setBinanceCoinPrice(formatCoinPrice);
-
     };
 
     getExchangeData();
@@ -40,12 +39,38 @@ const TableItem = ({ coinData, usdKrw }) => {
 
   const upbitPriceMinusBinancePrice = (Number(upbitPrice.replace(/,/g, '')) - Number(binanceDollarToWon)).toFixed(2);
   const premiumPercentage = ((upbitPriceMinusBinancePrice / Number(binanceDollarToWon))* 100).toFixed(2);
+
+  const isInWatchlist = (ticker) => {
+    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+    return watchlist.includes(ticker);
+  };
+
+  // 즐겨찾기 : ticker를 localStorage에 저장
+  const handleWatchlist = () => {
+    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+    if (!watchlist.includes(ticker)) {
+      // save
+      watchlist.push(ticker);
+      localStorage.setItem('watchlist', JSON.stringify(watchlist));
+      alert(`${ticker} has been added to your watchlist!`);
+    } else {
+      // remove
+      watchlist = watchlist.filter(coin => coin !== ticker);
+      localStorage.setItem('watchlist', JSON.stringify(watchlist));
+      alert(`${ticker} has been removed from your watchlist.`);
+    }
+  };
+
   return (
     <>
       <Tr>
         <Td>
           <div className='flex'>
-          <FaStar className='text-yellow-400 mr-2'/>
+          <FaStar 
+              className={`mr-2 cursor-pointer ${isInWatchlist(ticker) ? 'text-yellow-400' : 'text-gray-400'}`} 
+              onClick={handleWatchlist} // 클릭 시 localStorage에 ticker 추가 또는 제거
+            />
           {ticker}
           </div>
         </Td>

@@ -14,22 +14,22 @@ const CoinTabs = () => {
   const [usdKrw, setUsdKrw] = useState();
 
   useEffect(() => {
-    const getCurrencyPrice = async () => {
-      const priceUsdKrw = await getUsdKrwCurrenyPrice();
-      setUsdKrw(priceUsdKrw);
+    const getCurrencyPriceAndExchangeData = async () => {
+      try {
+        const [priceUsdKrw, coinData] = await Promise.all([
+          getUsdKrwCurrenyPrice(),
+          getMarketDataFromUpbit(),
+        ]);
+  
+        setUsdKrw(priceUsdKrw);
+        setAllCoinDataFromUpbit(coinData);
+      } catch (error) {
+        console.error("Failed to fetch prices: ", error);
+      }
     }
-
-    getCurrencyPrice();
+    getCurrencyPriceAndExchangeData();
   }, []);
 
-  useEffect(() => {
-    const getExchangeData = async () => {
-      const coinData = await getMarketDataFromUpbit();
-      setAllCoinDataFromUpbit(coinData);
-    }
-
-    getExchangeData();
-  },[]);
 
   return (
     <div>
