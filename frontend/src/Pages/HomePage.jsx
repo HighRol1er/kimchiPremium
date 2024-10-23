@@ -2,6 +2,7 @@ import React, { useEffect, useRef, memo } from 'react';
 import BtcKrwBtcUsdtChart from '../components/Homepage/BtcKrwBtcUsdtChart';
 import BitcoinDChart from '../components/Homepage/BitcoinDChart';
 import CoinTabs from '../components/Homepage/CoinTabs';
+import ChatBox from '../components/Homepage/ChatBoxComponents/ChatBox';
 
 /**
  * TODO: setInterval + 관심목록 업데이트( 지금 새로고침 안누르면 바로바로 업데이트 안됨)
@@ -19,8 +20,8 @@ function HomePage() {
         <div className='flex-1 bg-gray-800  rounded-lg'>
           <CoinTabs />
         </div>
-        <div className='w-1/3 bg-gray-800  rounded-lg h-[800px]'>
-          chatbox
+        <div className='w-1/3 bg-gray-800 rounded-lg h-[800px]'>
+          <ChatBox />
         </div>
       </div>
     </div>
