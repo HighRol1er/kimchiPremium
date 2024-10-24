@@ -1,81 +1,108 @@
-import { useEffect, useState } from "react";
-import { Button } from "@chakra-ui/react"
+import { useEffect, useRef, useState } from "react";
+
 import { io } from 'socket.io-client';
 import Cookies from "js-cookie";
 import MessageBox from "./MessageBox";
-
+import ButtonGroup from "./ButtonGroup";
 const socket = io('http://localhost:3010'); 
 
 const ChatBox = () => {
   const [message, setMessage] = useState("");
   const [receiveMsg, setReceiveMsg] = useState([]);
-  const [username, setUsername] = useState("가즈아");
-  const [changeName, setChangeName] = useState("");
+  const [username, setUsername] = useState("");
 
-  const setCookie = () => {
-    Cookies.set('username', '가즈아');
-  };
+  const messageEndRef = useRef(null);  // 최신 메시지에 스크롤을 맞추기 위한 ref
 
-  function getCookieFormStorage() {
-    const cookiesValue = Cookies.get('username');
-    setUsername(cookiesValue || '가즈아');  // 쿠키값 없으면 '가즈아'로 설정
-  };
+  const InitializeUsername = () => {
+    const cookieValue = Cookies.get('username'); // 쿠키 값 없으면 undefined 반환 
 
-  function changeUsername() {
-    Cookies.set('username', changeName);
-    setUsername(changeName);
+    // 쿠키 없을 때 기본 이름 설정
+    if(cookieValue === undefined) {
+      Cookies.set('username', '가즈아');
+      return setUsername("가즈아");
+    }
+    setUsername(cookieValue);
   };
 
   useEffect(() => {
-    setCookie();
-    getCookieFormStorage();
+    InitializeUsername();
 
-    // 메시지를 수신할 때마다 실행
     const handleReceiveMessage = (data) => {
       setReceiveMsg((prevMessages) => [...prevMessages, `${data.username}: ${data.message}`]);
     };
 
     socket.on("chat_message", handleReceiveMessage);
-    // socket.on("user_id", setUserId);
+
      // (cleanup) 함수 추가
     return () => {
-      socket.off("set_cookie");
+      // socket.off("set_cookie");
       socket.off("chat_message", handleReceiveMessage);  // 리스너를 제거하여 중복 등록 방지
-      socket.off("user_id");
+      // socket.off("user_id");
     };
   }, []);
+
+  useEffect(() => {
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [receiveMsg]);  // receiveMsg 배열이 업데이트될 때마다 실행
 
   // client -> server 메세지 보내기
   const sendMsgWithEnter = (e) => {
     if(e.key === "Enter") {
-      socket.emit("send_message", { username: username, message: message });
+      if (!changeNameCommand(message)) {
+        socket.emit("send_message", { username: username, message: message });
+      }
       setMessage("");
     }
   };
 
+  // 이름 바꾸기 
+  function changeUsername(newName) {
+    Cookies.set('username', newName);
+    setUsername(newName);
+  };
+
+  const changeNameCommand = (msg) => {
+    const commandPrefix = ".호칭";
+    if (msg.startsWith(commandPrefix)) {
+      const newName = msg.slice(commandPrefix.length).trim(); // ".호칭" 다음의 이름 추출
+      if (newName) {
+        changeUsername(newName);
+      }
+      return true;  // 메시지가 이름 변경 명령이었다면 처리 완료 후 true 반환
+    }
+    return false;  // 아닐 경우 false 반환
+  };
+
+  // 호칭 버튼 누르면 자동으로 input칸에 .호칭 출력
+  const onClickAutoCompleteChangeNameCommand = () => {
+    setMessage(".호칭 ");
+  }
+
   return (
     <div className='flex flex-col justify-between h-full'>
-      <div className="m-2 ">
-      <Button size="xs" colorScheme="blue">호칭</Button>
-        <hr className="mt-2 w-full"/>
-        <ul>
-          {receiveMsg.map((msg, i) => (
-            <div 
-              className="p-1" 
-              key={i}
-            >
-              {msg}
-            </div>
-            // <MessageBox key={i} msg={msg}/>
-          ))}
-        </ul>
+      
+      <div>
+      <div className="text-center font-bold ">Chat Box</div>
+        <ButtonGroup onClickAutoCompleteChangeNameCommand={onClickAutoCompleteChangeNameCommand}/>
+        <hr className="mt-1 w-full bg-red-100"/>
+        <div className="h-[700px] overflow-y-auto">
+          <ul className="ml-3 mt-2 h-full">
+            {receiveMsg.map((msg, i) => (
+              <MessageBox key={i} msg={msg} />
+            ))}
+            <div ref={messageEndRef} />
+          </ul>
+        </div>
       </div>
+
       <input 
         type='text'
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={sendMsgWithEnter}
-        className='bg-slate-600 h-10 rounded-lg m-2'
+        className='bg-slate-600 h-10 rounded-lg m-1'
       />
     </div>
   )

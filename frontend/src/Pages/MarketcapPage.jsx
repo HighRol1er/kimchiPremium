@@ -25,7 +25,6 @@ const MarketcapPage = () => {
     } catch (error) {
       console.error("Error in getCoinsFromGeckoApi", error);
     }
-  
   };
   
   useEffect(() => {

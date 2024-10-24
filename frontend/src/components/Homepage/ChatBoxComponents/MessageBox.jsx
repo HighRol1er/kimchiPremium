@@ -1,8 +1,11 @@
 import React from 'react'
+import { FaRegCircleUser } from "react-icons/fa6";
 
-const MessageBox = () => {
+const MessageBox = ({ msg }) => {
   return (
-    <div>MessageBox</div>
+    <li className="p-1 flex items-center gap-2">
+      <FaRegCircleUser className=''/> {msg}
+    </li>
   )
 }
 
