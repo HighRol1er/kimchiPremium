@@ -47,7 +47,7 @@ const TableItem = ({ coinData, usdKrw }) => {
 
   // 즐겨찾기 : ticker를 localStorage에 저장
   const handleWatchlist = () => {
-    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
 
     if (!watchlist.includes(ticker)) {
       // save
