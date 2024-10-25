@@ -39,5 +39,3 @@ router.get('/price-binance', async(req, res) => {
   }
 });
 
-
-export default router;

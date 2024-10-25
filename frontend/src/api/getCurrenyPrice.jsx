@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api" : "/api";
+
 export const getUsdKrwCurrenyPrice = async () => {
   try {
-    const response = await axios.get('http://localhost:3010/api/usd-krw');
+    const response = await axios.get(`${API_URL}/usd-krw`);
     const priceData = response.data.usd_krw;
     const usdKrwPrice = priceData.slice(0, -3);
 
@@ -14,7 +16,7 @@ export const getUsdKrwCurrenyPrice = async () => {
 
 export const getJpyKrwCurrenyPrice = async () => {
   try {
-    const response = await axios.get('http://localhost:3010/api/jpy-krw');
+    const response = await axios.get(`${API_URL}/jpy-krw`);
     const priceData = response.data.jpy_krw;
 
     return priceData;
@@ -25,7 +27,7 @@ export const getJpyKrwCurrenyPrice = async () => {
 
 export const getKrwUsdtCurrencyPrice = async () => {
   try {
-    const response = await axios.get('http://localhost:3010/api/upbit-krw-usdt');
+    const response = await axios.get(`${API_URL}/upbit-krw-usdt`);
     const priceData = response.data.price.toLocaleString();
 
     return priceData;
@@ -36,7 +38,7 @@ export const getKrwUsdtCurrencyPrice = async () => {
 
 export const getUsdtUsdCurrencyPrice = async () => {
   try {
-    const response = await axios.get('http://localhost:3010/api/usdt-usd');
+    const response = await axios.get(`${API_URL}/usdt-usd`);
     const priceData = response.data.usdt_usd;
 
     return priceData;
