@@ -4,7 +4,7 @@ import { io } from 'socket.io-client';
 import Cookies from "js-cookie";
 import MessageBox from "./MessageBox";
 import ButtonGroup from "./ButtonGroup";
-const socket = io('http://localhost:3010'); 
+const socket = io('http://localhost:5000'); 
 
 const ChatBox = () => {
   const [message, setMessage] = useState("");
