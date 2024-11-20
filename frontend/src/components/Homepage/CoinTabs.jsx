@@ -33,7 +33,7 @@ const CoinTabs = () => {
 
   return (
     <div>
-      <Tabs isFitted variant='line' size='lg' defaultIndex={1}>
+      <Tabs isFitted variant='line' size='lg' defaultIndex={0}>
         <TabList mb='1em'>
           <Tab _hover={{ bg: 'gray.700', color: 'gray.100' }}>전체</Tab>
           <Tab _hover={{ bg: 'gray.700', color: 'gray.100' }}>관심</Tab>
@@ -49,7 +49,7 @@ const CoinTabs = () => {
           <TabPanel>
             
             <WatchListCoinsTable allCoinDataFromUpbit={allCoinDataFromUpbit} usdKrw={usdKrw}/>
-          
+
           </TabPanel>
         </TabPanels>
       </Tabs>

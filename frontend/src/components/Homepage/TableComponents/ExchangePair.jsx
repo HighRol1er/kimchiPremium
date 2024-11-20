@@ -15,6 +15,7 @@ const ExchangePair = () => {
           </Link>
           <div>Upbit</div>
         </div>
+        
         <div className='flex flex-col items-center'>
           <div>비교거래소</div> 
           <Link to="https://www.binance.com/en">

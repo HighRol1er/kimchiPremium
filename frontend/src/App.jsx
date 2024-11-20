@@ -7,6 +7,10 @@ import Footer from './components/Footer/Footer'
 // import MarketcapPage from './Pages/MarketcapPage'
 import { lazy, Suspense } from 'react'
 
+// 변명의 기회 한번만 제발 제발 
+
+// 코드 스플릿, 
+
 const HomePage = lazy(() => import('./Pages/HomePage'));
 const ChartPage = lazy(() => import('./Pages/ChartPage'));
 const MarketcapPage = lazy(() => import('./Pages/MarketcapPage'));

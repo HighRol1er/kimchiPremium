@@ -7,8 +7,10 @@ import ButtonGroup from "./ButtonGroup";
 
 const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api" : import.meta.env.CLIENT_URL;
 
-// const socket = io('http://localhost:5000'); 
-const socket = io(API_URL); 
+// 배포 전 
+const socket = io('http://localhost:5000'); 
+// 배포 
+// const socket = io(API_URL); 
 
 
 const ChatBox = () => {
@@ -16,7 +18,7 @@ const ChatBox = () => {
   const [receiveMsg, setReceiveMsg] = useState([]);
   const [username, setUsername] = useState("");
 
-  const messageEndRef = useRef(null);  // 최신 메시지에 스크롤을 맞추기 위한 ref
+  const chatContainerRef = useRef(null);  // 최신 메시지에 스크롤을 맞추기 위한 ref
 
   const InitializeUsername = () => {
     const cookieValue = Cookies.get('username'); // 쿠키 값 없으면 undefined 반환 
@@ -47,10 +49,15 @@ const ChatBox = () => {
   }, []);
 
   useEffect(() => {
-    if (messageEndRef.current) {
-      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({ 
+        top: chatContainerRef.current.scrollHeight, 
+        behavior: "smooth" 
+      });
     }
-  }, [receiveMsg]);  // receiveMsg 배열이 업데이트될 때마다 실행
+  }, [receiveMsg]); // receiveMsg가 변경될 때마다 실행
+
+
 
   // client -> server 메세지 보내기
   const sendMsgWithEnter = (e) => {
@@ -87,17 +94,15 @@ const ChatBox = () => {
 
   return (
     <div className='flex flex-col justify-between h-full'>
-      
       <div>
-      <div className="text-center font-bold ">Chat Box</div>
+        <div className="text-center font-bold" >Chat Box</div>
         <ButtonGroup onClickAutoCompleteChangeNameCommand={onClickAutoCompleteChangeNameCommand}/>
         <hr className="mt-1 w-full bg-red-100"/>
-        <div className="h-[700px] overflow-y-auto">
+        <div className="h-[700px] overflow-y-auto" ref={chatContainerRef}>
           <ul className="ml-3 mt-2 h-full">
             {receiveMsg.map((msg, i) => (
-              <MessageBox key={i} msg={msg} />
+              <MessageBox key={i} msg={msg} receiveMsg={receiveMsg}/>
             ))}
-            <div ref={messageEndRef} />
           </ul>
         </div>
       </div>
