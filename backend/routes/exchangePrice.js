@@ -30,12 +30,18 @@ router.get('/price-binance', async(req, res) => {
 
   try {
     const response = await axios.get(url);
+    if (!response.data || !response.data.price) {
+      // 가격 정보를 찾을 수 없을 경우
+      return res.status(200).json({ price: null }); // 에러 메시지 없이 그냥 null 반환
+    }
+    
     const price = response.data.price; // string 
 
     res.json({price});
   } catch (error) {
     console.log("Error from Binance API", error);
-    res.status(500).json({ message: 'Error in fetching data' });
+    // res.status(500).json({ message: 'Error in fetching data' });
+    res.status(200).json({ price: null });
   }
 });
 

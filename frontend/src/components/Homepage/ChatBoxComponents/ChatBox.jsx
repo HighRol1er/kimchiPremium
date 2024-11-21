@@ -8,9 +8,9 @@ import ButtonGroup from "./ButtonGroup";
 const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api" : import.meta.env.CLIENT_URL;
 
 // 배포 전 
-const socket = io('http://localhost:5000'); 
+// const socket = io('http://localhost:5000'); 
 // 배포 
-// const socket = io(API_URL); 
+const socket = io(API_URL); 
 
 
 const ChatBox = () => {

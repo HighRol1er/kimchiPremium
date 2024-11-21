@@ -12,6 +12,7 @@ export const getMarketDataFromUpbit = async () => {
     return data;
   } catch (error) {
     console.log('Error fetching data', error);
+    return null;
   }
 };
 
@@ -24,6 +25,7 @@ export const getPriceDataFromBinance = async (ticker) => {
     const price = response.data.price;
     return price;
   } catch (error) {
-    console.log('Error fetching data', error);
+    // console.log('Error fetching data', error);
+    return null;
   }
 };

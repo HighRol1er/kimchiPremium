@@ -6,6 +6,8 @@ import { getPriceDataFromBinance } from '../../../api/getExchangeData';
 const TableItem = ({ coinData, usdKrw }) => {
   const [binanceCoinPrice, setBinanceCoinPrice] = useState();
   const [binanceDollarToWon, setBinanceDollarToWon] = useState('');
+  // NOTE:
+  const [watchlist, setWatchlist] = useState([]); 
   
   const ticker = coinData.market.replace('KRW-','');
   const upbitPrice = coinData.trade_price.toLocaleString();
@@ -14,8 +16,10 @@ const TableItem = ({ coinData, usdKrw }) => {
   const formatVolume = volume.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
   useEffect(() => {
+
     const getExchangeData = async () => {
       const coinPrice = await getPriceDataFromBinance(ticker);
+      // console.log(coinPrice);
       const formatCoinPrice = Number(coinPrice).toFixed(2);
 
       setBinanceCoinPrice(formatCoinPrice);
@@ -40,26 +44,46 @@ const TableItem = ({ coinData, usdKrw }) => {
   const upbitPriceMinusBinancePrice = (Number(upbitPrice.replace(/,/g, '')) - Number(binanceDollarToWon)).toFixed(2);
   const premiumPercentage = ((upbitPriceMinusBinancePrice / Number(binanceDollarToWon))* 100).toFixed(2);
 
-  const isInWatchlist = (ticker) => {
-    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-    return watchlist.includes(ticker);
-  };
+  // const isInWatchlist = (ticker) => {
+  //   const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+  //   return watchlist.includes(ticker);
+  // };
+  useEffect(() => {
+    const storedWatchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+    setWatchlist(storedWatchlist);
+  },[])
 
   // 즐겨찾기 : ticker를 localStorage에 저장
+  // const handleWatchlist = () => {
+  //   let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+  //   if (!watchlist.includes(ticker)) {
+  //     // save
+  //     watchlist.push(ticker);
+  //     localStorage.setItem('watchlist', JSON.stringify(watchlist));
+  //     alert(`${ticker} has been added to your watchlist!`);
+  //   } else {
+  //     // remove
+  //     watchlist = watchlist.filter(coin => coin !== ticker);
+  //     localStorage.setItem('watchlist', JSON.stringify(watchlist));
+  //     alert(`${ticker} has been removed from your watchlist.`);
+  //   }
+  // };
   const handleWatchlist = () => {
-    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+    let updatedWatchlist;
 
     if (!watchlist.includes(ticker)) {
       // save
-      watchlist.push(ticker);
-      localStorage.setItem('watchlist', JSON.stringify(watchlist));
+      updatedWatchlist = [...watchlist, ticker];
       alert(`${ticker} has been added to your watchlist!`);
     } else {
       // remove
-      watchlist = watchlist.filter(coin => coin !== ticker);
-      localStorage.setItem('watchlist', JSON.stringify(watchlist));
+      updatedWatchlist = watchlist.filter((coin) => coin !== ticker);
       alert(`${ticker} has been removed from your watchlist.`);
     }
+
+    setWatchlist(updatedWatchlist); // 상태 업데이트
+    localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist)); // localStorage 업데이트
   };
 
   return (
@@ -68,7 +92,7 @@ const TableItem = ({ coinData, usdKrw }) => {
         <Td>
           <div className='flex'>
           <FaStar 
-              className={`mr-2 cursor-pointer ${isInWatchlist(ticker) ? 'text-yellow-400' : 'text-gray-400'}`} 
+              className={`mr-2 cursor-pointer ${watchlist.includes(ticker) ? 'text-yellow-400' : 'text-gray-400'}`} 
               onClick={handleWatchlist} // 클릭 시 localStorage에 ticker 추가 또는 제거
             />
           {ticker}

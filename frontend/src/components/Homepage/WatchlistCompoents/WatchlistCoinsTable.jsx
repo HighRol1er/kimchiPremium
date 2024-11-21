@@ -14,12 +14,15 @@ const WatchListCoinsTable = ({ allCoinDataFromUpbit, usdKrw }) => {
   const [watchlist, setWatchlist] = useState(() => {
     return JSON.parse(localStorage.getItem('watchlist')) || [];
   });
-
+  
   const filteredCoinData = allCoinDataFromUpbit.filter(coinData => 
     watchlist.includes(coinData.market.replace('KRW-', ''))
   );
 
-
+  useEffect(() => {
+    const storedWatchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+    setWatchlist(storedWatchlist);
+  }, []);
   return (
       <TableContainer>
       <Table variant='striped' colorScheme='whiteAlpha' size='sm'>
