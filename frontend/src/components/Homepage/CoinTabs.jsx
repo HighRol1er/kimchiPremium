@@ -15,12 +15,14 @@ const CoinTabs = () => {
 
   useEffect(() => {
     const getCurrencyPriceAndExchangeData = async () => {
+      // 시간 측정 
+
       try {
         const [priceUsdKrw, coinData] = await Promise.all([
           getUsdKrwCurrenyPrice(),
           getMarketDataFromUpbit(),
         ]);
-  
+
         setUsdKrw(priceUsdKrw);
         setAllCoinDataFromUpbit(coinData);
       } catch (error) {
@@ -29,7 +31,6 @@ const CoinTabs = () => {
     }
     getCurrencyPriceAndExchangeData();
   }, []);
-
 
   return (
     <div>

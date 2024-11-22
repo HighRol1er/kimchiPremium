@@ -1,7 +1,5 @@
-// import btc from "../../assets/btcforproject.svg";
 import upbitLogo from "../../../assets/logo_upbit.svg";
 import binanceLogo from "../../../assets/logo_binance.svg";
-
 
 import { Link } from "react-router-dom";
 

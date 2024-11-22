@@ -16,6 +16,18 @@ const TableItem = ({ coinData, usdKrw }) => {
   const formatVolume = volume.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
   useEffect(() => {
+/*
+이미 병렬일 수 있음 < 체크요소 
+api 자체가 오래걸릴 수 있음 < 체크요소 
+로딩 or 스켈레톤 필 수 (ui ux )
+
+api 굳이 한번에 다 될 필요 있나.. 
+무한 스크롤( << prefetch랑 연계해서 . )
+음...
+
+react query(캐싱) , zustand는 굳이 안써도 < 체크 요소 )
+
+*/ 
 
     const getExchangeData = async () => {
       const coinPrice = await getPriceDataFromBinance(ticker);

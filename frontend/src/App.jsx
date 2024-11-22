@@ -2,18 +2,18 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
-// import HomePage from './Pages/HomePage'
-// import ChartPage from './Pages/ChartPage'
-// import MarketcapPage from './Pages/MarketcapPage'
+import HomePage from './Pages/HomePage'
+import ChartPage from './Pages/ChartPage'
+import MarketcapPage from './Pages/MarketcapPage'
 import { lazy, Suspense } from 'react'
-
-// 변명의 기회 한번만 제발 제발 
 
 // 코드 스플릿, 
 
-const HomePage = lazy(() => import('./Pages/HomePage'));
-const ChartPage = lazy(() => import('./Pages/ChartPage'));
-const MarketcapPage = lazy(() => import('./Pages/MarketcapPage'));
+
+// home 은 lazy 의미 업슴ㄴ 
+// const HomePage = lazy(() => import('./Pages/HomePage'));
+// const ChartPage = lazy(() => import('./Pages/ChartPage'));
+// const MarketcapPage = lazy(() => import('./Pages/MarketcapPage'));
 
 function App() {
   return(

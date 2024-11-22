@@ -1,5 +1,3 @@
-import React from 'react'
-
 const CurrencyPriceItem = ({ icon: Icon, price1, price2 }) => {
   return (
     <div className='flex gap-2'>

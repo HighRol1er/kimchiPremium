@@ -1,4 +1,3 @@
-import React, { useEffect, useRef } from 'react'
 import { FaRegCircleUser } from "react-icons/fa6";
 
 const MessageBox = ({ msg }) => {
