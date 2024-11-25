@@ -26,7 +26,6 @@ api 굳이 한번에 다 될 필요 있나..
 음...
 
 react query(캐싱) , zustand는 굳이 안써도 < 체크 요소 )
-
 */ 
 
     const getExchangeData = async () => {

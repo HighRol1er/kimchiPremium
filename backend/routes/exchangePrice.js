@@ -15,7 +15,7 @@ router.get('/market-upbit', async (req, res) => {
   try {
     const response = await axios.get(url);
     res.json(response.data);
-
+    console.log(response);
   } catch (error) {
     console.log("Error from Upbit API", error);
     res.status(500).json({ message: 'Error in fetching data' });
@@ -44,4 +44,7 @@ router.get('/price-binance', async(req, res) => {
     res.status(200).json({ price: null });
   }
 });
+
+
+
 

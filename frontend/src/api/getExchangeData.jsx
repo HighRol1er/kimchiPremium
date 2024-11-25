@@ -9,7 +9,10 @@ export const getMarketDataFromUpbit = async () => {
     // console.log(response);
     const data = response.data;
     // console.log(data);
+    // const upbitTickers = data.map(coin => coin.market.replace('KRW-',''));
+    // console.log(upbitTickers);
     return data;
+    return upbitTickers;
   } catch (error) {
     console.log('Error fetching data', error);
     return null;
@@ -29,3 +32,16 @@ export const getPriceDataFromBinance = async (ticker) => {
     return null;
   }
 };
+
+// batch api
+export const getDataFromBinance = async() => {
+  try {
+    const response = await axios.get(`${API_URL}/exchange/batch-price-binance`);
+    const data = response.data;
+    // console.log(data);
+    
+    return(data);
+  } catch (error) {
+    console.error(error);
+  }
+}

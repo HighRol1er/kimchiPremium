@@ -2,36 +2,33 @@ import { useEffect, useState } from 'react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
 import ExchangePair from './TableComponents/ExchangePair';
-import AllCoinsTable from './TableComponents/AllCoinsTable';
-import WatchListCoinsTable from './WatchlistCompoents/WatchlistCoinsTable';
 
-import { getMarketDataFromUpbit } from '../../api/getExchangeData';
-import { getUsdKrwCurrenyPrice } from '../../api/getCurrenyPrice';
+import { getDataFromBinance, getMarketDataFromUpbit } from '../../api/getExchangeData';
+
+import CoinTable from './CoinTable';
 
 
 const CoinTabs = () => {
-  const [allCoinDataFromUpbit, setAllCoinDataFromUpbit] = useState([]);
-  const [usdKrw, setUsdKrw] = useState();
+  const [upbitCryptoTicker, setUpbitCryptoTicker] = useState([]);
+  const [binanceCryptoTicker, setBinanceCryptoTicker] = useState([]);
 
   useEffect(() => {
-    const getCurrencyPriceAndExchangeData = async () => {
-      // 시간 측정 
-
+    const getCryptoData = async () => {
       try {
-        const [priceUsdKrw, coinData] = await Promise.all([
-          getUsdKrwCurrenyPrice(),
+        const [upbit, binance] = await Promise.all([
           getMarketDataFromUpbit(),
+          getDataFromBinance(),
         ]);
 
-        setUsdKrw(priceUsdKrw);
-        setAllCoinDataFromUpbit(coinData);
+        setUpbitCryptoTicker(upbit);
+        setBinanceCryptoTicker(binance);
       } catch (error) {
-        console.error("Failed to fetch prices: ", error);
+        console.error(error);
       }
     }
-    getCurrencyPriceAndExchangeData();
-  }, []);
-
+    getCryptoData();
+  },[])
+  // console.log(binanceCryptoTicker);
   return (
     <div>
       <Tabs isFitted variant='line' size='lg' defaultIndex={0}>
@@ -45,11 +42,14 @@ const CoinTabs = () => {
         
         <TabPanels>
           <TabPanel>
-            <AllCoinsTable allCoinDataFromUpbit={allCoinDataFromUpbit} usdKrw={usdKrw} />
+
+            <CoinTable upbitCryptoTicker={upbitCryptoTicker} binanceCryptoTicker={binanceCryptoTicker} />
+            
           </TabPanel>
           <TabPanel>
             
-            <WatchListCoinsTable allCoinDataFromUpbit={allCoinDataFromUpbit} usdKrw={usdKrw}/>
+            {/* <WatchListCoinsTable allCoinDataFromUpbit={allCoinDataFromUpbit} usdKrw={usdKrw}/> */}
+            <CoinTable upbitCryptoTicker={upbitCryptoTicker} binanceCryptoTicker={binanceCryptoTicker} />
 
           </TabPanel>
         </TabPanels>

@@ -5,7 +5,9 @@ import Footer from './components/Footer/Footer'
 import HomePage from './Pages/HomePage'
 import ChartPage from './Pages/ChartPage'
 import MarketcapPage from './Pages/MarketcapPage'
+
 import { lazy, Suspense } from 'react'
+import { UsdKrwProvider } from './context/exchangeContext'
 
 // 코드 스플릿, 
 
@@ -19,18 +21,20 @@ function App() {
   return(
     <div className='bg-[#131313] font-sans'>
       <ChakraProvider>
-        <Header />
-        <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/chart' element={<ChartPage />} />
-          <Route path='/marketcap' element={<MarketcapPage />} />
-          
-          {/* Catch all routes */}
-          <Route path='/*' element={<Navigate to='/' replace />} />
-        </Routes>
-        </Suspense>
-        <Footer />
+        <UsdKrwProvider>
+          <Header />
+          <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/chart' element={<ChartPage />} />
+            <Route path='/marketcap' element={<MarketcapPage />} />
+              
+              {/* Catch all routes */}
+            <Route path='/*' element={<Navigate to='/' replace />} />
+          </Routes>
+          </Suspense>
+          <Footer />
+        </UsdKrwProvider>
       </ChakraProvider>
     </div>
   )

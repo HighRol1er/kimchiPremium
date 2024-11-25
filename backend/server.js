@@ -21,6 +21,7 @@ app.use(cors({
   credentials: true,
 }));
 
+app.use(express.json());
 app.use('/api',currencyRoute);
 // app.use('/api/exchange/', exchangeRoute);
 
@@ -60,7 +61,6 @@ if(process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
 }
-
 
 server.listen(PORT, () => {
   console.log(`Sever Listening on Port: ${PORT}`);

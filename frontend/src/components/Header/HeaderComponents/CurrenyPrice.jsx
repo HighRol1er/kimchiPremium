@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import CurrencyPriceItem from "./CurrencyPriceItem";
 
 import { getJpyKrwCurrenyPrice, getKrwUsdtCurrencyPrice, getUsdKrwCurrenyPrice, getUsdtUsdCurrencyPrice } from "../../../api/getCurrenyPrice";
-
 import { HiCurrencyDollar,HiCurrencyYen } from "react-icons/hi";
 import usdt from "../../../assets/usdt.svg";
 
