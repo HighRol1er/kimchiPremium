@@ -13,17 +13,16 @@ import TableItems from './TableItems';
 
 // import TableItem from './TableItem';
 
-const CoinTable = ({ upbitCryptoTicker, binanceCryptoTicker, usdKrw }) => {
-  const [upbitCryptoData, setUpbitCryptoData] = useState([]);
+const CoinTable = ({ upbitCryptoTicker, binanceCryptoTicker, filteredCoins }) => {
   const [commonCryptoData, setCommonCryptoData] = useState([]);
   
   useEffect(() => {
     // NOTE: Wait upbit & binance crypto data 
     if (upbitCryptoTicker.length === 0 && binanceCryptoTicker.length === 0) {
-      console.log("Waiting for crypto data");
+      // console.log("Waiting for crypto data");
       return; 
     }
-    
+
     const mergeTicker = upbitCryptoTicker.map(upbitTicker => {
       const matchingBinanceCrypto = binanceCryptoTicker.find(
         binanceCoin => binanceCoin.binance_ticker === upbitTicker.market
@@ -41,7 +40,7 @@ const CoinTable = ({ upbitCryptoTicker, binanceCryptoTicker, usdKrw }) => {
     
   }, [upbitCryptoTicker, binanceCryptoTicker]);
 
-  console.log(commonCryptoData);
+  // console.log(commonCryptoData);
 
   return (
     <TableContainer>
