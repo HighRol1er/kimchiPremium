@@ -132,22 +132,20 @@ router.get('/exchange/batch-price-binance', async(req, res) => {
   }
 });
 
-
 // Get ticker price from Binance
-// TODO:업비트에는 있지만 바이낸스에는 없는 티커가 있어서 이거 예외처리해줘야됨
-router.get('/exchange/price-binance', async(req, res) => {
-  const { ticker } = req.query;
-  const url = `https://www.binance.com/api/v3/ticker/price?symbol=${ticker}USDT`;
+// router.get('/exchange/price-binance', async(req, res) => {
+//   const { ticker } = req.query;
+//   const url = `https://www.binance.com/api/v3/ticker/price?symbol=${ticker}USDT`;
   
-  try {
-    const response = await axios.get(url);
-    const price = response.data.price; // string 
+//   try {
+//     const response = await axios.get(url);
+//     const price = response.data.price; // string 
 
-    res.json({price});
-  } catch (error) {
-    console.log("Error from Binance API", error);
-    res.status(500).json({ message: 'Error in fetching data' });
-  }
-});
+//     res.json({price});
+//   } catch (error) {
+//     console.log("Error from Binance API", error);
+//     res.status(500).json({ message: 'Error in fetching data' });
+//   }
+// });
 
 export default router;
