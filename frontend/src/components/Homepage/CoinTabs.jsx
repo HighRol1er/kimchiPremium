@@ -27,15 +27,20 @@ const CoinTabs = () => {
         console.error(error);
       }
     }
-    getCryptoData();
+    // getCryptoData();
 
-    // 즐찾
-    const storedFavoriteCoins = JSON.parse(localStorage.getItem('favoriteCoins')) || [];
-    setFavoriteCoins(storedFavoriteCoins);
+    const interval = setInterval(() => {
+      getCryptoData();
+    }, 3000);
+
+    // Cleanup: 컴포넌트 언마운트 시 인터벌 정리
+    return () => clearInterval(interval);
+
   },[])
 
     // 탭 변경 시 즐겨찾기 코인 다시 로드
     useEffect(() => {
+      // console.log("실행2")
       if (selectedTab === 1) {
         const storedFavoriteCoins = JSON.parse(localStorage.getItem('favoriteCoins')) || [];
         setFavoriteCoins(storedFavoriteCoins);
@@ -48,7 +53,7 @@ const CoinTabs = () => {
   const handleTabChange = (index) => {
     setSelectedTab(index); // 탭 변경 시 인덱스 업데이트
   };
-  console.log(selectedTab);
+  // console.log(selectedTab);
   return (
     <div>
       <Tabs isFitted variant='line' size='lg' defaultIndex={1} onChange={handleTabChange}>
@@ -65,7 +70,7 @@ const CoinTabs = () => {
           </TabPanel>
           <TabPanel>
             {/* <CoinTable upbitCryptoTicker={upbitCryptoTicker} binanceCryptoTicker={binanceCryptoTicker} /> */}
-            <CoinTable upbitCryptoTicker={filteredCoins} binanceCryptoTicker={filteredCoins} />
+            <CoinTable upbitCryptoTicker={filteredCoins} binanceCryptoTicker={filteredCoins} onFavoriteChange={setFavoriteCoins} />
           </TabPanel>
         </TabPanels>
       </Tabs>

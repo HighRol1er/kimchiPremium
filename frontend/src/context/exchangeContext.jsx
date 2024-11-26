@@ -12,8 +12,13 @@ export const UsdKrwProvider = ({ children}) => {
       // console.log(response);
       setUsdKrwPrice(response);
     }
+    
+    const interval = setInterval(() => {
+      getUsdKrwPrice();
+    }, 60000);
 
-    getUsdKrwPrice();
+    // Cleanup: 컴포넌트 언마운트 시 인터벌 정리
+    return () => clearInterval(interval);
   }, []);
 
 

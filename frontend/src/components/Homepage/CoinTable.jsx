@@ -1,20 +1,22 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Table,
   Thead,
   Tbody,
   Tr,
-  Td,
   Th,
   TableContainer,
 } from '@chakra-ui/react';
 import TableItems from './TableItems';
 
-
-// import TableItem from './TableItem';
-
-const CoinTable = ({ upbitCryptoTicker, binanceCryptoTicker, filteredCoins }) => {
+const CoinTable = ({ upbitCryptoTicker, binanceCryptoTicker, onFavoriteChange }) => {
   const [commonCryptoData, setCommonCryptoData] = useState([]);
+
+  const handleFavoriteChange = (updatedFavorites) => {
+    if (onFavoriteChange) {
+      onFavoriteChange(updatedFavorites);
+    }
+  };
   
   useEffect(() => {
     // NOTE: Wait upbit & binance crypto data 
@@ -59,7 +61,7 @@ const CoinTable = ({ upbitCryptoTicker, binanceCryptoTicker, filteredCoins }) =>
         <Tbody>
           {commonCryptoData.map((coin,index) => {
             return (
-              <TableItems coin={coin} key={index}/>
+              <TableItems coin={coin} key={index} onFavoriteChange={handleFavoriteChange} />
             )
           })}
         </Tbody>

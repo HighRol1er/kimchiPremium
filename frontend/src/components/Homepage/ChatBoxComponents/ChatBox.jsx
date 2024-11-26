@@ -12,7 +12,6 @@ const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/
 // 배포 
 const socket = io(API_URL); 
 
-
 const ChatBox = () => {
   const [message, setMessage] = useState("");
   const [receiveMsg, setReceiveMsg] = useState([]);

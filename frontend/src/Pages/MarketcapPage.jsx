@@ -58,7 +58,7 @@ const MarketcapPage = () => {
               {(coin.symbol).toUpperCase()}
             </Td>
             <Td>$ {coin.current_price.toLocaleString()}</Td>
-            <Td>{coin.market_cap.toLocaleString()}</Td>
+            <Td>$ { coin.market_cap.toLocaleString() }</Td>
             <Td>{coin.circulating_supply.toLocaleString()}</Td>
           </Tr>
         )
