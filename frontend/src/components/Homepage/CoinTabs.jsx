@@ -27,7 +27,7 @@ const CoinTabs = () => {
         console.error(error);
       }
     }
-    // getCryptoData();
+    getCryptoData();
 
     const interval = setInterval(() => {
       getCryptoData();

@@ -1,4 +1,3 @@
-// import FetchChart from "../components/Chartpage/FetchChart"
 import TradingViewChart from "../components/common/TradingViewChart"
 TradingViewChart
 

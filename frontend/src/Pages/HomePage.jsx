@@ -1,12 +1,7 @@
-// import BtcKrwBtcUsdtChart from '../components/Homepage/BtcKrwBtcUsdtChart';
-// import BitcoinDChart from '../components/Homepage/BitcoinDChart';
 import CoinTabs from '../components/Homepage/CoinTabs';
 import ChatBox from '../components/Homepage/ChatBoxComponents/ChatBox';
 import TradingViewChart from '../components/common/TradingViewChart';
 
-/**
- * TODO: setInterval + 관심목록 업데이트( 지금 새로고침 안누르면 바로바로 업데이트 안됨)
- */
 function HomePage() {
 
   return (

@@ -19,19 +19,19 @@ export const getMarketDataFromUpbit = async () => {
   }
 };
 
-export const getPriceDataFromBinance = async (ticker) => {
-  try {
-    const response = await axios.get(`${API_URL}/exchange/price-binance`,{
-      params: { ticker }
-    });
+// export const getPriceDataFromBinance = async (ticker) => {
+//   try {
+//     const response = await axios.get(`${API_URL}/exchange/price-binance`,{
+//       params: { ticker }
+//     });
 
-    const price = response.data.price;
-    return price;
-  } catch (error) {
-    // console.log('Error fetching data', error);
-    return null;
-  }
-};
+//     const price = response.data.price;
+//     return price;
+//   } catch (error) {
+//     // console.log('Error fetching data', error);
+//     return null;
+//   }
+// };
 
 // batch api
 export const getDataFromBinance = async() => {

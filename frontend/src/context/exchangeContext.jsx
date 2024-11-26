@@ -12,7 +12,8 @@ export const UsdKrwProvider = ({ children}) => {
       // console.log(response);
       setUsdKrwPrice(response);
     }
-    
+    getUsdKrwPrice();
+
     const interval = setInterval(() => {
       getUsdKrwPrice();
     }, 60000);

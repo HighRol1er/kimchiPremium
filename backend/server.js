@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import currencyRoute from "./routes/currencyPrice.js";
-// import exchangeRoute from "./routes/exchangePrice.js";
 import cors from "cors";
 import path from "path";
 import { createServer } from 'http';
@@ -23,7 +22,6 @@ app.use(cors({
 
 app.use(express.json());
 app.use('/api',currencyRoute);
-// app.use('/api/exchange/', exchangeRoute);
 
 const io = new Server(server, {
   cors: {

@@ -3,10 +3,11 @@ import { UsdKrwContext } from '../../context/exchangeContext';
 import { useContext, useEffect, useState } from 'react';
 import { formatBinancePriceToLocale, formatChangeRate, formatDollarToWon, formatKimchiPremium, formatTradeVolume } from '../../functions/formatCryptoData';
 import { FaStar } from 'react-icons/fa6';
-import useWatchlist from '../../hooks/useWatchlist';
+// import useWatchlist from '../../hooks/useWatchlist';
 
 const TableItems = ({ coin, onFavoriteChange  }) => {
   const { usdKrwPrice } = useContext(UsdKrwContext);
+
   const [isFavorite, setIsFavorite] = useState(false); // 즐겨찾기 상태
   const [ binancePriceInWon, setBinancePriceInWon ] = useState();
   const [ kimchiPremium, setKimchiPremium] = useState({});
@@ -28,6 +29,7 @@ const TableItems = ({ coin, onFavoriteChange  }) => {
   }, [coin]);
 
   useEffect(() => {
+    console.log(usdKrwPrice);
     if(usdKrwPrice && coin.binance_price) {
       const binancePriceToWon = formatDollarToWon(coin.binance_price, usdKrwPrice);
 
