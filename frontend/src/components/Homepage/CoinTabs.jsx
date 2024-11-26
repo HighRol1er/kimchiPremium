@@ -32,16 +32,15 @@ const CoinTabs = () => {
     }
     getCryptoData();
 
-    // const interval = setInterval(() => {
-    //   getCryptoData();
-    // }, 3000);
+    const interval = setInterval(() => {
+      getCryptoData();
+    }, 3000);
 
-    // // Cleanup: 컴포넌트 언마운트 시 인터벌 정리
-    // return () => clearInterval(interval);
+    return () => clearInterval(interval);
 
   },[])
 
-    // 탭 변경 시 즐겨찾기 코인 다시 로드
+    // 탭 변경 즐겨찾기 리렌더
     useEffect(() => {
       // console.log("실행2")
       if (selectedTab === 1) {

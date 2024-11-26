@@ -106,14 +106,14 @@ router.get('/exchange/market-upbit', async (req, res) => {
   }
 });
 
-
+// Get ticker price from Binance
 router.get('/exchange/batch-price-binance', async(req, res) => {
   const url = 'https://api.binance.com/api/v3/ticker/price';
   
   try {
     const response = await axios.get(url);
     const data = response.data;
-    // console.log(data); // 2700개 불러오네 ㅋㅋ
+    // console.log(data); // 2700개 불러옴
 
     // USDT 페어만 필터링 // 530로 확 줄어듬
     const usdtPairTickers = data.filter(ticker => ticker.symbol.endsWith('USDT'));
@@ -132,21 +132,5 @@ router.get('/exchange/batch-price-binance', async(req, res) => {
       res.status(500).json({ message: 'Error in fetching data' });
   }
 });
-
-// Get ticker price from Binance
-// router.get('/exchange/price-binance', async(req, res) => {
-//   const { ticker } = req.query;
-//   const url = `https://www.binance.com/api/v3/ticker/price?symbol=${ticker}USDT`;
-  
-//   try {
-//     const response = await axios.get(url);
-//     const price = response.data.price; // string 
-
-//     res.json({price});
-//   } catch (error) {
-//     console.log("Error from Binance API", error);
-//     res.status(500).json({ message: 'Error in fetching data' });
-//   }
-// });
 
 export default router;

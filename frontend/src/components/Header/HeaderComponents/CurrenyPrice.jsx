@@ -12,7 +12,6 @@ const CurrenyPrice = () => {
   const [usdtKrw, setUsdtKrw] = useState("");
 
   useEffect(() => {
-    // promise all 사용하는게 좋지 않을까?
     const getCurrencyPrice = async () => {
       try {
         const [priceUsdKrw, priceJpyKrw, priceKrwUsdt, priceUsdtUsd] = await Promise.all([
