@@ -128,7 +128,8 @@ router.get('/exchange/batch-price-binance', async(req, res) => {
 
     res.json(binanceData);
   } catch (error) {
-    console.error(error);
+      console.log("Error from Binance API", error);
+      res.status(500).json({ message: 'Error in fetching data' });
   }
 });
 

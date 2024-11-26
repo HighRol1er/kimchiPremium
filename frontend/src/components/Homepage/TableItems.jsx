@@ -1,14 +1,14 @@
 import { Tr,Td } from '@chakra-ui/react';
-import { UsdKrwContext } from '../../context/exchangeContext';
+// import { UsdKrwContext } from '../../context/exchangeContext';
 import { useContext, useEffect, useState } from 'react';
 import { formatBinancePriceToLocale, formatChangeRate, formatDollarToWon, formatKimchiPremium, formatTradeVolume } from '../../functions/formatCryptoData';
 import { FaStar } from 'react-icons/fa6';
 // import useWatchlist from '../../hooks/useWatchlist';
 
-const TableItems = ({ coin, onFavoriteChange  }) => {
-  const { usdKrwPrice } = useContext(UsdKrwContext);
+const TableItems = ({ coin, onFavoriteChange, krwUsd  }) => {
+  // const { usdKrwPrice } = useContext(UsdKrwContext);
 
-  const [isFavorite, setIsFavorite] = useState(false); // 즐겨찾기 상태
+  const [ isFavorite, setIsFavorite ] = useState(false); // 즐겨찾기 상태
   const [ binancePriceInWon, setBinancePriceInWon ] = useState();
   const [ kimchiPremium, setKimchiPremium] = useState({});
   // console.log("binancePriceInWon>>>",binancePriceInWon);
@@ -28,17 +28,27 @@ const TableItems = ({ coin, onFavoriteChange  }) => {
     setIsFavorite(isCoinFavorite);
   }, [coin]);
 
+  // useEffect(() => {
+  //   if(usdKrwPrice && coin.binance_price) {
+  //     const binancePriceToWon = formatDollarToWon(coin.binance_price, usdKrwPrice);
+
+  //     const premium = formatKimchiPremium(binancePriceToWon,upbitPrice);
+
+  //     setBinancePriceInWon(binancePriceToWon);
+  //     setKimchiPremium(premium);
+  //   }
+  // },[usdKrwPrice, coin?.binance_price]);
+
   useEffect(() => {
-    console.log(usdKrwPrice);
-    if(usdKrwPrice && coin.binance_price) {
-      const binancePriceToWon = formatDollarToWon(coin.binance_price, usdKrwPrice);
+    if(krwUsd && coin.binance_price) {
+      const binancePriceToWon = formatDollarToWon(coin.binance_price, krwUsd);
 
       const premium = formatKimchiPremium(binancePriceToWon,upbitPrice);
 
       setBinancePriceInWon(binancePriceToWon);
       setKimchiPremium(premium);
     }
-  },[usdKrwPrice, coin?.binance_price]);
+  },[krwUsd, coin?.binance_price]);
 
   const toggleFavorite = () => {
     const favoriteCoins = JSON.parse(localStorage.getItem('favoriteCoins')) || [];

@@ -5,6 +5,7 @@ import { getDataFromBinance, getMarketDataFromUpbit } from '../../api/getExchang
 
 import ExchangePair from './TableComponents/ExchangePair';
 import CoinTable from './CoinTable';
+import { getUsdKrwCurrenyPrice } from '../../api/getCurrenyPrice';
 
 const CoinTabs = () => {
   const [selectedTab, setSelectedTab] = useState(1);
@@ -12,15 +13,17 @@ const CoinTabs = () => {
 
   const [upbitCryptoTicker, setUpbitCryptoTicker] = useState([]);
   const [binanceCryptoTicker, setBinanceCryptoTicker] = useState([]);
+  const [krwUsd, setKrwUsd] = useState(null);
 
   useEffect(() => {
     const getCryptoData = async () => {
       try {
-        const [upbit, binance] = await Promise.all([
+        const [upbit, binance, krwusd] = await Promise.all([
           getMarketDataFromUpbit(),
           getDataFromBinance(),
+          getUsdKrwCurrenyPrice(),
         ]);
-
+        setKrwUsd(krwusd);
         setUpbitCryptoTicker(upbit);
         setBinanceCryptoTicker(binance);
       } catch (error) {
@@ -29,12 +32,12 @@ const CoinTabs = () => {
     }
     getCryptoData();
 
-    const interval = setInterval(() => {
-      getCryptoData();
-    }, 3000);
+    // const interval = setInterval(() => {
+    //   getCryptoData();
+    // }, 3000);
 
-    // Cleanup: 컴포넌트 언마운트 시 인터벌 정리
-    return () => clearInterval(interval);
+    // // Cleanup: 컴포넌트 언마운트 시 인터벌 정리
+    // return () => clearInterval(interval);
 
   },[])
 
@@ -66,11 +69,11 @@ const CoinTabs = () => {
         </div>
         <TabPanels>
           <TabPanel>
-            <CoinTable upbitCryptoTicker={upbitCryptoTicker} binanceCryptoTicker={binanceCryptoTicker} />
+            <CoinTable upbitCryptoTicker={upbitCryptoTicker} binanceCryptoTicker={binanceCryptoTicker} krwUsd={krwUsd}/>
           </TabPanel>
           <TabPanel>
             {/* <CoinTable upbitCryptoTicker={upbitCryptoTicker} binanceCryptoTicker={binanceCryptoTicker} /> */}
-            <CoinTable upbitCryptoTicker={filteredCoins} binanceCryptoTicker={filteredCoins} onFavoriteChange={setFavoriteCoins} />
+            <CoinTable upbitCryptoTicker={filteredCoins} binanceCryptoTicker={filteredCoins} onFavoriteChange={setFavoriteCoins} krwUsd={krwUsd} />
           </TabPanel>
         </TabPanels>
       </Tabs>

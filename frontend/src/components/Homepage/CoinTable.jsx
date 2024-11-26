@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import TableItems from './TableItems';
 
-const CoinTable = ({ upbitCryptoTicker, binanceCryptoTicker, onFavoriteChange }) => {
+const CoinTable = ({ upbitCryptoTicker, binanceCryptoTicker, onFavoriteChange, krwUsd }) => {
   const [commonCryptoData, setCommonCryptoData] = useState([]);
 
   const handleFavoriteChange = (updatedFavorites) => {
@@ -61,7 +61,7 @@ const CoinTable = ({ upbitCryptoTicker, binanceCryptoTicker, onFavoriteChange })
         <Tbody>
           {commonCryptoData.map((coin,index) => {
             return (
-              <TableItems coin={coin} key={index} onFavoriteChange={handleFavoriteChange} />
+              <TableItems coin={coin} key={index} onFavoriteChange={handleFavoriteChange} krwUsd={krwUsd}/>
             )
           })}
         </Tbody>
