@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import CurrencyPriceItem from "./CurrencyPriceItem";
 
 import { getJpyKrwCurrenyPrice, getKrwUsdtCurrencyPrice, getUsdKrwCurrenyPrice, getUsdtUsdCurrencyPrice } from "../../../api/getCurrenyPrice";
-
 import { HiCurrencyDollar,HiCurrencyYen } from "react-icons/hi";
 import usdt from "../../../assets/usdt.svg";
 
@@ -13,7 +12,6 @@ const CurrenyPrice = () => {
   const [usdtKrw, setUsdtKrw] = useState("");
 
   useEffect(() => {
-    // promise all 사용하는게 좋지 않을까?
     const getCurrencyPrice = async () => {
       try {
         const [priceUsdKrw, priceJpyKrw, priceKrwUsdt, priceUsdtUsd] = await Promise.all([

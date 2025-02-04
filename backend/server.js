@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import currencyRoute from "./routes/currencyPrice.js";
-// import exchangeRoute from "./routes/exchangePrice.js";
 import cors from "cors";
 import path from "path";
 import { createServer } from 'http';
@@ -11,7 +10,7 @@ dotenv.config();
 
 const app = express();
 const server = createServer(app);
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5010;
 
 const __dirname = path.resolve();
 
@@ -21,8 +20,8 @@ app.use(cors({
   credentials: true,
 }));
 
+app.use(express.json());
 app.use('/api',currencyRoute);
-// app.use('/api/exchange/', exchangeRoute);
 
 const io = new Server(server, {
   cors: {
@@ -60,7 +59,6 @@ if(process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
 }
-
 
 server.listen(PORT, () => {
   console.log(`Sever Listening on Port: ${PORT}`);

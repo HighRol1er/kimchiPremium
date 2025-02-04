@@ -5,13 +5,12 @@ import Cookies from "js-cookie";
 import MessageBox from "./MessageBox";
 import ButtonGroup from "./ButtonGroup";
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api" : import.meta.env.CLIENT_URL;
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000" : import.meta.env.CLIENT_URL
 
 // 배포 전 
 // const socket = io('http://localhost:5000'); 
 // 배포 
 const socket = io(API_URL); 
-
 
 const ChatBox = () => {
   const [message, setMessage] = useState("");

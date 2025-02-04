@@ -14,8 +14,6 @@ const TradingViewChart = ({width, height, symbol}) => {
       script.async = true;
       script.innerHTML = `
         {
-          "width" : ${width},
-          "height" : ${height},
           "autosize": true,
           "symbol": "${symbol}",
           "interval": "D",
@@ -43,9 +41,5 @@ const TradingViewChart = ({width, height, symbol}) => {
   )
 }
 
-export default memo(TradingViewChart)
-
-
-/**
- * 내가 써야하는 심볼들에 맞춰서 작성하면 된다.
- */
+export default memo(TradingViewChart);
+// export default TradingViewChart

@@ -1,40 +1,64 @@
 import { useEffect, useState } from 'react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
-import ExchangePair from './TableComponents/ExchangePair';
-import AllCoinsTable from './TableComponents/AllCoinsTable';
-import WatchListCoinsTable from './WatchlistCompoents/WatchlistCoinsTable';
+import { getDataFromBinance, getMarketDataFromUpbit } from '../../api/getExchangeData';
 
-import { getMarketDataFromUpbit } from '../../api/getExchangeData';
+import ExchangePair from './TableComponents/ExchangePair';
+import CoinTable from './CoinTable';
 import { getUsdKrwCurrenyPrice } from '../../api/getCurrenyPrice';
 
-
 const CoinTabs = () => {
-  const [allCoinDataFromUpbit, setAllCoinDataFromUpbit] = useState([]);
-  const [usdKrw, setUsdKrw] = useState();
+  const [selectedTab, setSelectedTab] = useState(1);
+  const [favoriteCoins, setFavoriteCoins] = useState([]);
+
+  const [upbitCryptoTicker, setUpbitCryptoTicker] = useState([]);
+  const [binanceCryptoTicker, setBinanceCryptoTicker] = useState([]);
+  const [krwUsd, setKrwUsd] = useState(null);
 
   useEffect(() => {
-    const getCurrencyPriceAndExchangeData = async () => {
-      // 시간 측정 
-
+    const getCryptoData = async () => {
       try {
-        const [priceUsdKrw, coinData] = await Promise.all([
-          getUsdKrwCurrenyPrice(),
+        const [upbit, binance, krwusd] = await Promise.all([
           getMarketDataFromUpbit(),
+          getDataFromBinance(),
+          getUsdKrwCurrenyPrice(),
         ]);
-
-        setUsdKrw(priceUsdKrw);
-        setAllCoinDataFromUpbit(coinData);
+        setKrwUsd(krwusd);
+        setUpbitCryptoTicker(upbit);
+        setBinanceCryptoTicker(binance);
       } catch (error) {
-        console.error("Failed to fetch prices: ", error);
+        console.error(error);
       }
     }
-    getCurrencyPriceAndExchangeData();
-  }, []);
+    getCryptoData();
 
+    const interval = setInterval(() => {
+      getCryptoData();
+    }, 3000);
+
+    return () => clearInterval(interval);
+
+  },[])
+
+    // 탭 변경 즐겨찾기 리렌더
+    useEffect(() => {
+      // console.log("실행2")
+      if (selectedTab === 1) {
+        const storedFavoriteCoins = JSON.parse(localStorage.getItem('favoriteCoins')) || [];
+        setFavoriteCoins(storedFavoriteCoins);
+      }
+    }, [selectedTab]);
+  
+  // console.log(binanceCryptoTicker);
+  const filteredCoins = selectedTab === 1 ? favoriteCoins : [...upbitCryptoTicker, ...binanceCryptoTicker]; 
+
+  const handleTabChange = (index) => {
+    setSelectedTab(index); // 탭 변경 시 인덱스 업데이트
+  };
+  // console.log(selectedTab);
   return (
     <div>
-      <Tabs isFitted variant='line' size='lg' defaultIndex={0}>
+      <Tabs isFitted variant='line' size='lg' defaultIndex={1} onChange={handleTabChange}>
         <TabList mb='1em'>
           <Tab _hover={{ bg: 'gray.700', color: 'gray.100' }}>전체</Tab>
           <Tab _hover={{ bg: 'gray.700', color: 'gray.100' }}>관심</Tab>
@@ -42,15 +66,13 @@ const CoinTabs = () => {
         <div className='pl-4'>
           <ExchangePair />
         </div>
-        
         <TabPanels>
           <TabPanel>
-            <AllCoinsTable allCoinDataFromUpbit={allCoinDataFromUpbit} usdKrw={usdKrw} />
+            <CoinTable upbitCryptoTicker={upbitCryptoTicker} binanceCryptoTicker={binanceCryptoTicker} krwUsd={krwUsd}/>
           </TabPanel>
           <TabPanel>
-            
-            <WatchListCoinsTable allCoinDataFromUpbit={allCoinDataFromUpbit} usdKrw={usdKrw}/>
-
+            {/* <CoinTable upbitCryptoTicker={upbitCryptoTicker} binanceCryptoTicker={binanceCryptoTicker} /> */}
+            <CoinTable upbitCryptoTicker={filteredCoins} binanceCryptoTicker={filteredCoins} onFavoriteChange={setFavoriteCoins} krwUsd={krwUsd} />
           </TabPanel>
         </TabPanels>
       </Tabs>

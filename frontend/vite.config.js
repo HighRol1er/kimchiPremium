@@ -14,14 +14,6 @@ export default defineConfig({
   ],
   build: {
     rollupOptions: {
-      // output: {
-      //   manualChunks(id) {
-      //     const nodeModules = id.includes('node_modules');
-      //     if (nodeModules) {
-      //       return id.toString().split('node_modules/')[1].split('/')[0].toString();
-      //     }
-      //   }
-      // }
       output: {
         manualChunks: (id) => {
           const module = id.split("node_modules/").pop().split("/")[0];
